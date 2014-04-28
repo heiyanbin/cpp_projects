@@ -38,8 +38,7 @@ int main3()
 	int n;
 	cin>>n;
 	char (*a)[300] = new char[n][300];
-    
-    char b[100];
+
 	for(int i=0;i<n;i++)
 	{
 		cin>>a[i];
@@ -110,4 +109,5 @@ int main3()
         operand.pop_back();
     }
     delete[] a;
+    return 0;
 }
