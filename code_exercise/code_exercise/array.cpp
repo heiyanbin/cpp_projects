@@ -296,7 +296,7 @@ void testFindMidIn2SortedArray()
 
 void testBinarySearchInShiftedSortedArray()
 {
-    int a[] {5,6,7,7,8,1,2,3,4};
+    int a[] = {5,6,7,7,8,1,2,3,4};
     int i = binarySearchInShiftedSortedArray(a, 9, 6);
     std::cout<<(i<0?i:a[i])<<std::endl;
     

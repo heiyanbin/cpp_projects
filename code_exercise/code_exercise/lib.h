@@ -26,8 +26,9 @@ void testFindMaxSubArraySum();
 void testPerm();
 void testCombine();
 void testRotateMatrix();
-
-
+void testEvalSubfix();
+void testMidfixToSubfix();
+void testEvalMidfix();
 
 /*template <typename T>
 void swap(T &a, T &b)

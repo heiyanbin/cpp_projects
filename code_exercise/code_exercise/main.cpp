@@ -13,8 +13,9 @@ int main(int argc, const char * argv[])
     //testFindMaxSubArraySum();
     //testPerm();
     //testCombine();
-    testRotateMatrix();
-
-
+    //testRotateMatrix();
+    //testEvalSubfix();
+    //testMidfixToSubfix();
+    testEvalMidfix();
 }
 
