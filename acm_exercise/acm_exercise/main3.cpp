@@ -15,7 +15,7 @@ int main()
 	cin>>n;
 	char (*a)[300] = new char[n][300];
     vector<char> op;
-    vector<char> value;
+    vector<int> operand;
 	for(int i=0;i<n;i++)
 	{
 		gets(a[i]);
@@ -28,28 +28,48 @@ int main()
             cout<<atoi(p);
             continue;
         }
+        bool lastPushNumber= false;
 		while(*p)
 		{
 			if(*p=='a')
 			{
 				p++;
-                if(*p!='d') return -1;
+                if(*p!='d') throw invalid_argument("unknown op.");
 				p++;
-                if(*p!='d') return -1;
+                if(*p!='d') throw invalid_argument("unknown op.");
                 op.push_back('+');
+                lastPushNumber = false;
                 p++;
 			}
-            if(*p=='(')
+            else if(*p=='('||*p==')')
             {
-                op.push_back('(');
+                p++;
+                //op.push_back('(');
             }
-            if(*p<'9' && *p>'0')
+            else if(*p<'9' && *p>'0')
             {
-                char*q =p;
-                
+                int v =0;
+                while(*p<'9'&&*p>'0')
+                {
+                    v=v*10+*p-'0';
+                    p++;
+                }
+                if(!lastPushNumber)
+                {
+                    operand.push_back(v);
+                    lastPushNumber =true;
+                }
+                else{
+                    int tmp =  operand.back();
+                    operand.pop_back();
+                    char oper = op.back();
+                    op.pop_back();
+                    if(oper=='+')
+                        operand.push_back(tmp+v);
+                }
             }
 			
         }
-                
+        cout<<
     }
 }
