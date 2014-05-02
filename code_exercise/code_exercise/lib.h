@@ -29,7 +29,8 @@ void testRotateMatrix();
 void testEvalSubfix();
 void testMidfixToSubfix();
 void testEvalMidfix();
-
+void testNormalizePath();
+void testLCS();
 /*template <typename T>
 void swap(T &a, T &b)
 {d

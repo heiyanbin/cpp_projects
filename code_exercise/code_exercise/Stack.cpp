@@ -215,3 +215,44 @@ void testEvalMidfix()
     cout<<evalMidfix(a)<<endl;
 }
 
+void normalizePath(char * path)
+{
+    if(!path)throw invalid_argument("NULL argument");
+    int i=0,j=0;
+    while(path[j])
+    {
+        if(path[j]!='.')
+        {
+            path[i]=path[j];
+            i++;
+            j++;
+        }
+        else if(path[j+1]!='.')
+        {
+            if(!path[i+1])
+            {
+                i--;
+                break;
+            }
+            else
+                j=j+2;
+        }
+        else
+        {
+            i=i-2;
+            if(i<0) throw invalid_argument("invalid path");
+            while(path[i]!='\\')
+                  i--;
+            if(i<0) throw invalid_argument("invalid path");
+            j=j+2;
+        }
+    }
+    path[i]='\0';
+}
+
+void testNormalizePath()
+{
+    char a[]= "c:\\aaa\\.\\.\\..\\bb\\ccc\\..\\dd\\.\\ee";
+    normalizePath(a);
+    cout<<a<<endl;
+}

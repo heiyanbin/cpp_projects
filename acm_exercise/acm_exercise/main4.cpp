@@ -36,7 +36,7 @@ bool isPrime(int x)
     }
     return true;
 }
-int main()
+int main4()
 {
   int n;
   cin>>n;
@@ -67,5 +67,6 @@ int main()
       cout<< (a[i]-x < y-a[i] ? x : y) <<endl;
   }
   delete [] a;
+  return 0;
 }
 

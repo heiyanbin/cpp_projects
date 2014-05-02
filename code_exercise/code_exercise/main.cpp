@@ -16,6 +16,8 @@ int main(int argc, const char * argv[])
     //testRotateMatrix();
     //testEvalSubfix();
     //testMidfixToSubfix();
-    testEvalMidfix();
+    //testEvalMidfix();
+    //testNormalizePath();
+    testLCS();
 }
 
