@@ -31,6 +31,8 @@ void testMidfixToSubfix();
 void testEvalMidfix();
 void testNormalizePath();
 void testLCS();
+void testLRS();
+void testMaxHuiwen();
 /*template <typename T>
 void swap(T &a, T &b)
 {d

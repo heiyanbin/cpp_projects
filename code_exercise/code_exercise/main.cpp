@@ -18,6 +18,8 @@ int main(int argc, const char * argv[])
     //testMidfixToSubfix();
     //testEvalMidfix();
     //testNormalizePath();
-    testLCS();
+    //testLCS();
+    //testLRS();
+    testMaxHuiwen();
 }
 
