@@ -20,6 +20,8 @@ int main(int argc, const char * argv[])
     //testNormalizePath();
     //testLCS();
     //testLRS();
-    testMaxHuiwen();
+    //testMaxHuiwen();
+    //testMyAtoi();
+    testMyItoa();
 }
 

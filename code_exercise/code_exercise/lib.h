@@ -33,6 +33,8 @@ void testNormalizePath();
 void testLCS();
 void testLRS();
 void testMaxHuiwen();
+void testMyAtoi();
+void testMyItoa();
 /*template <typename T>
 void swap(T &a, T &b)
 {d
