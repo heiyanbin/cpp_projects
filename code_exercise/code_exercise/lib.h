@@ -48,9 +48,9 @@ void printArray(T a[],int n)
 {
     if(!a||n<1) return;
     for (int i=0; i<n; i++) {
-        std::cout<<a[i]<<" ";
+        cout<<a[i]<<" ";
     }
-    std::cout<<std::endl;
+    cout<<std::endl;
 }
 template <typename T>
 void printVector(vector<T> v)

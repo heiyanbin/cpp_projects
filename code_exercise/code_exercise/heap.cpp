@@ -82,7 +82,7 @@ void heapSort(int a[], int n)
 
 void testHeapSort()
 {
-    int a[] ={1,3,4,2,6,5};
+    int a[] ={6,1,3,4,2,5};
     heapSort(a,6);
     printArray(a,6);
 }
