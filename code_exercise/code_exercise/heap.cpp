@@ -44,6 +44,7 @@ void minHeapFixDown(int a[], int i, int n)
             swap(a[i],a[j]);
         else
             break;
+        i=j;
         j=2*j+1;
     }
 }

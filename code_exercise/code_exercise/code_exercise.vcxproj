@@ -78,10 +78,11 @@
   <ItemGroup>
     <ClCompile Include="array.cpp" />
     <ClCompile Include="findK.cpp" />
+    <ClCompile Include="heap.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="matrix.cpp" />
     <ClCompile Include="sort.cpp" />
-    <ClCompile Include="Stack.cpp" />
+    <ClCompile Include="stack_use.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib.h" />
