@@ -36,6 +36,7 @@ void testMaxHuiwen();
 void testMyAtoi();
 void testMyItoa();
 void testHeapSort();
+void testMerge_sort();
 /*template <typename T>
 void swap(T &a, T &b)
 {d

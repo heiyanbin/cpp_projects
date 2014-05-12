@@ -23,6 +23,7 @@ int main(int argc, const char * argv[])
     //testMaxHuiwen();
     //testMyAtoi();
     //testMyItoa();
-    testHeapSort();
+    //testHeapSort();
+    testMerge_sort();
 }
 

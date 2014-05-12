@@ -43,11 +43,47 @@ void fast_sort(T a[], int begin, int end)
     fast_sort(a, begin, i-1);
     fast_sort(a, i+1, end);
 }
-
-
+template <typename T>
+void merge_array(T a[], int begin,int mid,int end)
+{
+    if(!a||begin>mid||mid>end) return;
+    int k=0,i=begin,j=mid+1;
+    T *c = new T[end-begin+1];
+    while(i<=mid && j<=end)
+    {
+        if(a[i]<a[j])
+            c[k++]=a[i++];
+        else
+            c[k++]=a[j++];
+    }
+    while(i<=mid)
+        c[k++]=a[i++];
+    while(j<=end)
+        c[k++]=a[j++];
+    for(int i=0;begin+i<=end;i++)
+        a[begin+i]=c[i];
+    delete[] c;
+}
+template <typename T>
+void merge_sort(T a[],int begin, int end)
+{
+    if(!a||begin>=end) return;
+    int mid = (begin+end)/2;
+    merge_sort(a, begin, mid);
+    merge_sort(a, mid+1, end);
+    merge_array(a,begin,mid,end);
+}
 void testFast_sort()
 {
     int a[] = {7,3,4,8,8,5,1,2,4};
+    fast_sort(a, 0, 8);
+    printArray(a, 9);
+}
+void testMerge_sort()
+{
+    int a[] = {7,3,4,8,8,5,1,2,4};
+    merge_sort(a, 0, 8);
+    printArray(a, 9);
     fast_sort(a, 0, 8);
     printArray(a, 9);
 }
