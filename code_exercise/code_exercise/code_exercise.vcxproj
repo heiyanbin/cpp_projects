@@ -83,6 +83,7 @@
     <ClCompile Include="matrix.cpp" />
     <ClCompile Include="sort.cpp" />
     <ClCompile Include="stack_use.cpp" />
+    <ClCompile Include="tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib.h" />

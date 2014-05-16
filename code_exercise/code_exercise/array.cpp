@@ -271,6 +271,40 @@ void combine(int a[],int m, int begin, int end)
     if(end-begin+1>m)
         combine(a, m, begin+1, end);
 }
+
+ void MSQuestions_6(int a[], int b[], int n)
+{
+    if(!a ||!b|| n<1) throw invalid_argument("invalid argument");
+    int test =1;
+    bool changed = true;
+    while(changed)
+    {
+        changed =false;
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]>n||a[i]<0)
+            {
+                b[i]=0;
+            }
+            else
+            {
+                int count =0;
+                for(int j=0;j<n;j++)
+                {
+                    if(b[j]==a[i]) 
+                        count++;
+                }
+                if(b[i]!=count)
+                {
+                    b[i]=count;
+                    changed = true;
+                }
+            }
+        }
+    }
+    
+}
+
 void testCombine()
 {
     int a[] = {1,2,3,4};
@@ -320,4 +354,13 @@ void testRelocateOddAndEven()
     printArray(a, 8);
     relocateOddAndEven2(a,8);
     printArray(a, 8);
+}
+
+void testMSQuestions_6()
+{
+    int a[] = {0,1,2,3,4,5};
+    int b[6] ={0};
+    MSQuestions_6(a,b,6);
+    printArray(a,6);
+    printArray(b,6);
 }
