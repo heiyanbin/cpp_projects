@@ -192,3 +192,59 @@ void testMyItoa()
 {
     cout<<myItoa(0)<<endl<<myItoa(-123)<<endl<<myItoa(456)<<endl;
 }
+
+int myStrstr(const char* a, const char* b)
+{
+    if(!a||!b) return -1;
+    for(int i=0;a[i];i++)
+    {
+        int j=0;
+        while( b[j] && a[i+j] && a[i+j]== b[j])
+        {
+            j++;
+        }
+        if(!b[j]) return i;
+        if(!a[i+j]) return -1;
+    }
+    return -1;
+}
+
+void testMyStrstr()
+{
+    cout<<myStrstr("abcde","de")<<endl;
+    cout<<myStrstr("abcde", "ab")<<endl;
+    cout<<myStrstr("abcde", "bc")<<endl;
+    cout<<myStrstr("abcde", "xx")<<endl;
+}
+
+int myStrcmp(const char* a, const char* b)
+{
+    if(!a && !b) return 0;
+    if(!a && b) return -1;
+    if(a && !b) return 1;
+    if(!(*a)&&!(*b)) return 0;
+    if(*a==*b) return myStrcmp(a+1, b+1);
+    return *a > *b ? 1 : -1;
+}
+int myStrcmp2(const char* a, const char* b)
+{
+    if(!a&&b) return -1;
+    if(!a&&!b) return 0;
+    if(a&&!b) return 1;
+    while(*a && *b && *a==*b)
+    {
+        a++;
+        b++;
+    }
+    if(!(*a)&&!(*b)) return 0;
+    if(*a && !(*b)) return 1;
+    if(!(*a) && *b) return -1;
+    return *a>*b? 1: -1;
+}
+
+void testMyStrcmp()
+{
+    cout<<myStrcmp("abc", "abcd")<<' '<<myStrcmp2("abc", "abcd")<<endl;
+    cout<<myStrcmp("abc", "abc")<<' '<<myStrcmp2("abc", "abc")<<endl;
+    cout<<myStrcmp("abc", "aaa")<<' '<<myStrcmp2("abc", "aaa")<<endl;
+}

@@ -38,6 +38,8 @@ void testMyItoa();
 void testHeapSort();
 void testMerge_sort();
 void testMSQuestions_6();
+void testMyStrstr();
+void testMyStrcmp();
 /*template <typename T>
 void swap(T &a, T &b)
 {d
