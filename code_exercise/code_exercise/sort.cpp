@@ -73,17 +73,133 @@ void merge_sort(T a[],int begin, int end)
     merge_sort(a, mid+1, end);
     merge_array(a,begin,mid,end);
 }
+template <typename T>
+void bubble_sort(T a[], int n)
+{
+    if(!a || n<2) return;
+    int m = n-1;
+    bool changed = true;
+    while(m>=0 && changed)
+    {
+        changed = false;
+        for(int i=0;i<m;i++)
+        {
+            if(a[i]>a[i+1]) 
+            {
+                swap(a[i],a[i+1]);
+                changed = true;
+            }
+        }
+        m--;
+    }
+}
+template <typename T>
+void select_sort(T a[], int n)
+{
+    if(!a || n<2) return;
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            if(a[j]<a[i]) 
+                swap(a[i],a[j]);
+        }
+    }
+}
+template <typename T>
+void insert_sort(T a[], int n)
+{
+    if(!a || n<2) return;
+    for(int i=1;i<n;i++)
+    {
+        int x = a[i];
+        int j=i-1;
+        while(j>=0 && x<a[j])
+        {    
+            a[j+1]=a[j];
+            j--;
+        }
+        a[j+1]=x;
+    }
+}
+
+template <typename T>
+void count_sort(T a[], int n)
+{
+    if(!a||n<2) return;
+    int min=a[0], max=a[0];
+    for(int i=1;i<n;i++)
+    {
+        if(a[i]<min) min= a[i];
+        if(a[i]>max) max= a[i];
+    }
+    int range = max-min+1;
+    int *c = new int[range];
+    for(int i=0;i<range;i++)
+        c[i]=0;
+
+    for(int i=0;i<n;i++)
+    {
+        c[a[i]-min]++;
+    }
+    int j=0;
+    for(int i=0;i<range;i++)
+    {
+        
+        while(c[i]>0)
+        {
+            a[j]=min+i;
+            j++;
+            c[i]--;
+        }
+    }
+    delete[] c;
+}
+template <typename T>
+void base_sort(T a[],int n)
+{
+    int b[10];
+
+}
 void testFast_sort()
 {
     int a[] = {7,3,4,8,8,5,1,2,4};
     fast_sort(a, 0, 8);
     printArray(a, 9);
 }
-void testMerge_sort()
+void testSort()
 {
-    int a[] = {7,3,4,8,8,5,1,2,4};
+    int x[] = {7,3,4,8,8,5,1,2,4};
+    int a[9];
+    printArray(x,9);
+    
+    memcpy(a,x,sizeof(int)*9);
+    cout<<"merge sort:"<<endl;
     merge_sort(a, 0, 8);
     printArray(a, 9);
+
+    memcpy(a,x,sizeof(int)*9);
+    cout<<"fast sort:"<<endl;
     fast_sort(a, 0, 8);
+    printArray(a, 9);
+
+    memcpy(a,x,sizeof(int)*9);
+    cout<<"bubble sort:"<<endl;
+    bubble_sort(a, 9);
+    printArray(a, 9);
+
+    memcpy(a,x,sizeof(int)*9);
+    cout<<"select sort:"<<endl;
+    select_sort(a, 9);
+    printArray(a, 9);
+
+    memcpy(a,x,sizeof(int)*9);
+    cout<<"insert sort:"<<endl;
+    insert_sort(a, 9);
+    printArray(a, 9);
+
+    memcpy(a,x,sizeof(int)*9);
+    cout<<"count sort:"<<endl;
+    count_sort(a, 9);
     printArray(a, 9);
 }

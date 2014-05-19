@@ -24,9 +24,9 @@ int main(int argc, const char * argv[])
     //testMyAtoi();
     //testMyItoa();
     //testHeapSort();
-    //testMerge_sort();
+    testSort();
     //testMSQuestions_6();
-    testMyStrstr();
+    //testMyStrstr();
     // testMyStrcmp();
 }
 

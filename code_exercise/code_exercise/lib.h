@@ -36,7 +36,7 @@ void testMaxHuiwen();
 void testMyAtoi();
 void testMyItoa();
 void testHeapSort();
-void testMerge_sort();
+void testSort();
 void testMSQuestions_6();
 void testMyStrstr();
 void testMyStrcmp();

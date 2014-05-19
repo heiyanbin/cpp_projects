@@ -42,7 +42,7 @@
     <ClCompile Include="string.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stack.cpp">
+    <ClCompile Include="stack_queue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
