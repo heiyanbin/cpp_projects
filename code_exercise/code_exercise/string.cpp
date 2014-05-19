@@ -195,7 +195,8 @@ void testMyItoa()
 
 int myStrstr(const char* a, const char* b)
 {
-    if(!a||!b) return -1;
+    if(!a||!(*a)) return -1;
+    if(!b||!(*b)) return 0;
     for(int i=0;a[i];i++)
     {
         int j=0;
@@ -208,13 +209,63 @@ int myStrstr(const char* a, const char* b)
     }
     return -1;
 }
-
+int myStrstr2(const char*a, const char* b)
+{
+    if(!a||!(*a)) return -1;
+    if(!b||!(*b)) return 0;
+    int i=0,j=0;
+    while(a[i])
+    {
+        while(a[i] && b[j] && a[i]==b[j])
+        {
+            i++;
+            j++;
+        }
+        if(!b[j]) return i-j;
+        if(!a[i]) return  -1;
+        i=i-j+1;
+        j=0;
+    }
+    return -1;
+}
+char* myStrstr3 ( char* a,  char *b)
+{
+    if(!a||!(*a) ) return NULL;
+    if(!b || !(*b)) return a;
+    while(*a)
+    {
+        int i=0;
+        while(a[i] && b[i] && a[i]==b[i])
+        {
+           i++;
+        }
+        if(!(b[i])) return a;
+        if(!(a[i])) return NULL;
+        a++;
+    }
+}
 void testMyStrstr()
 {
     cout<<myStrstr("abcde","de")<<endl;
     cout<<myStrstr("abcde", "ab")<<endl;
     cout<<myStrstr("abcde", "bc")<<endl;
     cout<<myStrstr("abcde", "xx")<<endl;
+    cout<<myStrstr("abcde", "")<<endl;
+    cout<<myStrstr("abcde", NULL)<<endl;
+
+    cout<<myStrstr2("abcde","de")<<endl;
+    cout<<myStrstr2("abcde", "ab")<<endl;
+    cout<<myStrstr2("abcde", "bc")<<endl;
+    cout<<myStrstr2("abcde", "xx")<<endl;
+    cout<<myStrstr2("abcde", "")<<endl;
+    cout<<myStrstr2("abcde", NULL)<<endl;
+
+    cout<<myStrstr3("abcde","de")<<endl;
+    cout<<myStrstr3("abcde", "ab")<<endl;
+    cout<<myStrstr3("abcde", "bc")<<endl;
+    cout<<myStrstr3("abcde", "xx")<<endl;
+    cout<<myStrstr3("abcde", "")<<endl;
+    cout<<myStrstr3("abcde", NULL)<<endl;
 }
 
 int myStrcmp(const char* a, const char* b)

@@ -82,7 +82,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrix.cpp" />
     <ClCompile Include="sort.cpp" />
+    <ClCompile Include="stack.cpp" />
     <ClCompile Include="stack_use.cpp" />
+    <ClCompile Include="string.cpp" />
     <ClCompile Include="tree.cpp" />
   </ItemGroup>
   <ItemGroup>
