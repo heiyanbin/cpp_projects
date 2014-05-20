@@ -155,6 +155,12 @@ void count_sort(T a[], int n)
     }
     delete[] c;
 }
+
+template <typename T>
+void bucket_sort(T a[], int n)
+{
+
+}
 template <typename T>
 void base_sort(T a[],int n)
 {

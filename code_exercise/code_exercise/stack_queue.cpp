@@ -149,3 +149,42 @@ public:
         delete node;
     }
 };
+
+template <typename T>
+class ArrayList
+{
+    int block_size;
+    int block_count;
+    int block_offset;
+    Node<T*> *head , *rear;
+public:
+    ArrayList():block_size(100),block_count(1),block_offset(-1)
+    {
+        head = new Node<T*>(new T[block_size]);
+        rear=head;
+    }
+    T get(int i)
+    {
+        int block_num = i/block_size;
+        int offset = i%/block_size;
+        Node<T*> *p= head;
+        for(int i= 0;i<block_num;i++)
+            p=p->next;
+        return p->data[offset];
+    }
+    void add(T item)
+    {
+        if(block_offset>=blok_size-1)
+        {
+            rear->next = new Node<T*>(new T[block_size]);
+            rear = rear->next;
+            rear->data[0]=item;
+            block_offset=0;
+        }
+        else
+        {
+            block_offset++;
+            rear->data[block_offset] =item;
+        }
+    }
+};
