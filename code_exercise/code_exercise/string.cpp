@@ -243,6 +243,7 @@ char* myStrstr3 ( char* a,  char *b)
         if(!(a[i])) return NULL;
         a++;
     }
+    return NULL;
 }
 void testMyStrstr()
 {

@@ -1,3 +1,5 @@
+#include "lib.h"
+
 template <typename T>
 class Stack
 {
@@ -12,7 +14,7 @@ public:
         size = default_size; 
         a= new T[size];
     }
-    Stack(int n) :size(n),:top(-1)
+    Stack(int n) :size(n),top(-1)
     {
         a= new T[size];
     }
@@ -22,13 +24,13 @@ public:
     }
     void push(T item)
     {
-        if(top+1>size-1) throw exception("stack overflow.");
+        if(top+1>size-1) throw  runtime_error("stack overflow.");
         top=top+1;
         a[top]=item;
     }
     T pop()
     {
-        if(top<0) throw exception("empty stack.");
+        if(top<0) throw runtime_error("empty stack.");
         return a[top--];
     }
     bool isEmpty()
@@ -53,18 +55,18 @@ public:
     {
         if(!top)
         {
-            top = new Node(item);
+            top = new Node<T>(item);
         }
         else
         {
-            Node<T> * newNode = new Node(item);
+            Node<T> * newNode = new Node<T>(item);
             newNode->next=top;
             top=newNode;
         }
     }
     T pop()
     {
-        if(!top) throw new exception("empty stack could not pop.");
+        if(!top) throw  runtime_error("empty stack could not pop.");
         T item = top->data;
         Node<T> * node  = top;
         top=node->next;
@@ -99,13 +101,13 @@ public:
 
     void enQueue(T item)
     {
-        if((rear+1/)%size==front) throw new exception("Full.");
+        if((rear+1)%size==front) throw runtime_error("Full.");
         rear=(rear+1)%size;
         a[rear]=item;
     }
     T deQueue()
     {
-        if(front==rear) throw new exception("Empty.");
+        if(front==rear) throw runtime_error("Empty.");
         front=(front+1)%size;
         return a[front];
     }
@@ -142,7 +144,7 @@ public:
 
     T deQueue()
     {
-        if(front==NULL) throw new exception("Empty Queue.");
+        if(front==NULL) throw  runtime_error("Empty Queue.");
         T item = front->data;
         Node<T>* node = front;
         front =front->next;
@@ -166,7 +168,7 @@ public:
     T get(int i)
     {
         int block_num = i/block_size;
-        int offset = i%/block_size;
+        int offset = i%block_size;
         Node<T*> *p= head;
         for(int i= 0;i<block_num;i++)
             p=p->next;
@@ -174,7 +176,7 @@ public:
     }
     void add(T item)
     {
-        if(block_offset>=blok_size-1)
+        if(block_offset>=block_size-1)
         {
             rear->next = new Node<T*>(new T[block_size]);
             rear = rear->next;

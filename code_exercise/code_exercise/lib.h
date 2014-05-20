@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cassert>
 
 #define min(a,b) a < b ? a : b
 #define max(a,b) a > b ? a : b
@@ -40,6 +41,9 @@ void testSort();
 void testMSQuestions_6();
 void testMyStrstr();
 void testMyStrcmp();
+void testReverseNum();
+void testPrimeFactor();
+void testIsHuiwenNum();
 /*template <typename T>
 void swap(T &a, T &b)
 {d

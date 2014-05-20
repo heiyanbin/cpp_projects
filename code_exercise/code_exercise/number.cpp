@@ -1,5 +1,5 @@
+#include <cmath>
 #include "lib.h"
-using namespace std;
 
 unsigned int fabonacci(unsigned int n)
 {
@@ -25,6 +25,7 @@ unsigned int fabonacci2(unsigned int n)
 
 int count_1(int num)
 {
+    if (num<0) return count_1(-num)+1;
     int count =0;
     while(num>0)
     {
@@ -35,21 +36,60 @@ int count_1(int num)
     return count;
 }
 
-int reverse(int n, int &result)
+int reverseNum(int n)
 {
-    if(n<0) 
+    if(n<0) return -reverseNum(-n);
+    if(n<10) return n;
+    int result=0;
+    while(n>0)
     {
-        reverse(-n, result);
-        result = -result;
+        int d = n%10;
+        result = result *10 +d;
+        n=n/10;
     }
-    else if(n<10) result = n;
-    else
+    return result;
+}
+void primeFactor(int n)
+{
+    if(n==0) throw invalid_argument(NULL);
+    if(n<0) {primeFactor(-n);return;}
+    int x= sqrt(n);
+    for(int i=2;i<=x;i++)
     {
-        while(n>0)
+        while ((n%i)==0)
         {
-            int d = n%10;
-            result = result *10 +d;
-            n=n/10;
+            cout<<i<<" ";
+            n=n/i;
         }
     }
+    cout<<endl;
+}
+bool isHuiwenNum(int n)
+{
+    int m =0;
+    int n1= n;
+    while(n1>0)
+    {
+        m= m * 10 + n1%10;
+        n1=n1/10;
+    }
+    return m==n;
+}
+
+void testReverseNum()
+{
+    assert(reverseNum(123)==321);
+    assert(reverseNum(-123)==-321);
+}
+void testPrimeFactor()
+{
+    primeFactor(36);
+    primeFactor(-40);
+}
+void testIsHuiwenNum()
+{
+    assert(isHuiwenNum(1234321));
+    assert(isHuiwenNum(0));
+    assert(isHuiwenNum(1));
+    assert(isHuiwenNum(123)==false);
 }

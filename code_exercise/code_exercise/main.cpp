@@ -24,9 +24,12 @@ int main(int argc, const char * argv[])
     //testMyAtoi();
     //testMyItoa();
     //testHeapSort();
-    testSort();
+    //testSort();
     //testMSQuestions_6();
     //testMyStrstr();
     // testMyStrcmp();
+    //testReverseNum();
+    //testPrimeFactor();
+    testIsHuiwenNum();
 }
 
