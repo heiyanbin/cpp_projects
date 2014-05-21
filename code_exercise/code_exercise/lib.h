@@ -44,6 +44,9 @@ void testMyStrcmp();
 void testReverseNum();
 void testPrimeFactor();
 void testIsHuiwenNum();
+void testGcd();
+void testLcm();
+void testSequentialSum();
 /*template <typename T>
 void swap(T &a, T &b)
 {d

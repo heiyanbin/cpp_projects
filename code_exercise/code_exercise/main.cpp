@@ -27,9 +27,12 @@ int main(int argc, const char * argv[])
     //testSort();
     //testMSQuestions_6();
     //testMyStrstr();
-    // testMyStrcmp();
+    //testMyStrcmp();
     //testReverseNum();
     //testPrimeFactor();
-    testIsHuiwenNum();
+    //testIsHuiwenNum();
+    //testGcd();
+    //testLcm();
+    testSequentialSum();
 }
 

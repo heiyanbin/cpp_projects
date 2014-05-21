@@ -75,6 +75,46 @@ bool isHuiwenNum(int n)
     }
     return m==n;
 }
+int gcd(int a, int b)
+{
+    int r=0;
+    while((r=a%b)!=0)
+    {
+        a=b;
+        b=r;
+    }
+    return b;
+}
+int lcm(int a, int b)
+{
+    assert(a && b);
+    return a*b/gcd(a,b);
+}
+void findSequentialSum(int n)
+{
+    assert(n>2);
+    int i=1, j=2;
+    int sum=i+j;
+    while(j<(n+1)/2)
+    {
+        if(sum==n)
+        {
+            for(int k=i;k<=j;k++)
+                cout<<k<<" ";
+            cout<<endl;
+        }
+        if(sum<n)
+        {
+            j++;
+            sum = sum +j;
+        }
+        else
+        {
+            i++;
+            sum= sum-i;
+        }
+    }
+}
 
 void testReverseNum()
 {
@@ -92,4 +132,22 @@ void testIsHuiwenNum()
     assert(isHuiwenNum(0));
     assert(isHuiwenNum(1));
     assert(isHuiwenNum(123)==false);
+}
+void testGcd()
+{
+    assert(gcd(64,48)==16);
+    assert(gcd(12,20)==4);
+    assert(gcd(4,8)==4);
+    assert(gcd(7,9)==1);
+}
+void testLcm()
+{
+    assert(lcm(6,8)==24);
+    assert(lcm(4,10)==20);
+    assert(lcm(3,5)==15);
+}
+void testSequentialSum()
+{
+    findSequentialSum(15);
+    findSequentialSum(25);
 }
