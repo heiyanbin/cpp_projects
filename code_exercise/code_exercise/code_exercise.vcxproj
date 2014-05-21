@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="array.cpp" />
+    <ClCompile Include="DP.cpp" />
     <ClCompile Include="findK.cpp" />
     <ClCompile Include="heap.cpp" />
     <ClCompile Include="main.cpp" />

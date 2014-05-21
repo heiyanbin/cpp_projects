@@ -47,6 +47,8 @@ void testIsHuiwenNum();
 void testGcd();
 void testLcm();
 void testSequentialSum();
+void testMin_number_of_coin();
+void testLIS();
 /*template <typename T>
 void swap(T &a, T &b)
 {d

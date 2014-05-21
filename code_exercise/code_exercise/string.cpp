@@ -43,19 +43,19 @@ char* LCS2(char *a, char *b)
     if(!(*b)) return a;
 
     int n= strlen(b);
-    int *c0 = new int[n], *c= new int[n];
+    int  *c= new int[n];
     int maxLen=0;
     int maxEnd=0;
     for(int i=0;a[i];i++)
     {
-        for(int j=0;b[j];j++)
+        for(int j=n-1;j>=0;j--)
         {
             if(a[i]==b[j])
             {
                 if(i==0 || j==0) 
                     c[j]=1;
                 else 
-                    c[j]=c0[j-1]+1;
+                    c[j]=c[j-1]+1;
                 if(c[j]>maxLen)
                 {
                     maxLen= c[j];
@@ -65,13 +65,8 @@ char* LCS2(char *a, char *b)
             else
                 c[j] =0;
         }
-        for(int k=0;k<n;k++)
-        {
-            c0[k]=c[k];
-        }
     }
     delete [] c;
-    delete [] c0;
     return b + maxEnd-maxLen+1;
 }
 void testLCS()
