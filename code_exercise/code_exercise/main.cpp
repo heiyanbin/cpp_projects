@@ -34,7 +34,7 @@ int main(int argc, const char * argv[])
     //testGcd();
     //testLcm();
     //testSequentialSum();
-    //testMin_number_of_coin();
-    testLIS();
+    testMin_number_of_coin();
+    //testLIS();
 }
 

@@ -21,7 +21,22 @@ int min_number_of_coin(int coin[], int coin_num, int value)
     delete [] d;
     return ret;
 }
-
+int min_number_of_coin_recursive(int coin[], int coin_num, int value)
+{
+    assert(coin && (coin_num>0 || value == 0));
+    if(value==0) return 0;
+    int min=65536;
+    for(int i=0;i<coin_num;i++)
+    {
+        if(coin[i]<=value)
+        {
+            int c = min_number_of_coin_recursive(coin, coin_num, value-coin[i])+1;
+            if(c<min)
+                min= c;
+        }
+    }
+    return min;
+}
 int LIS(int a[], int n)
 {
     assert(a && n>0);
@@ -66,7 +81,8 @@ int LSIS(int a[], int n)
         if(a[i]>=a[i-1] )
         {   
             maxLenEndWithPre++;
-            maxLen = max(maxLenEndWithPre,maxLen);
+            if(maxLenEndWithPre>maxLen)
+                maxLen = maxLenEndWithPre;
         }
         else
             maxLenEndWithPre=1;
@@ -100,7 +116,11 @@ int LSIS2(int a[], int n)
 void testMin_number_of_coin()
 {
     int coin[] = {1,2,5};
-    cout<<min_number_of_coin(coin, 3, 13)<<endl;
+    for(int i=0;i<20;i++)
+    {
+        cout<<min_number_of_coin(coin, 3, i)<<"  ";
+        cout<<min_number_of_coin_recursive(coin, 3, i)<<endl;
+    }
 }
 
 void testLIS()
