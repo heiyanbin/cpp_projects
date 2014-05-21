@@ -35,9 +35,49 @@ char*  LCS(char * a, char * b)
     LCS[maxLen]='\0';
     return LCS;
 }
+
+char* LCS2(char *a, char *b)
+{
+    if(!a||!b) return NULL;
+    if(!(*a)) return b;
+    if(!(*b)) return a;
+
+    int n= strlen(b);
+    int *c0 = new int[n], *c= new int[n];
+    int maxLen=0;
+    int maxEnd=0;
+    for(int i=0;a[i];i++)
+    {
+        for(int j=0;b[j];j++)
+        {
+            if(a[i]==b[j])
+            {
+                if(i==0 || j==0) 
+                    c[j]=1;
+                else 
+                    c[j]=c0[j-1]+1;
+                if(c[j]>maxLen)
+                {
+                    maxLen= c[j];
+                    maxEnd=j;
+                }
+            }
+            else
+                c[j] =0;
+        }
+        for(int k=0;k<n;k++)
+        {
+            c0[k]=c[k];
+        }
+    }
+    delete [] c;
+    delete [] c0;
+    return b + maxEnd-maxLen+1;
+}
 void testLCS()
 {
     cout<<LCS("abcdxyz", "xyuuuabbcd")<<endl;
+    cout<<LCS2("abcdxyz", "xyuuuabbcd")<<endl;
 }
 
 char * LRS (char * a)

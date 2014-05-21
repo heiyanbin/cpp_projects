@@ -81,6 +81,7 @@
     <ClCompile Include="heap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrix.cpp" />
+    <ClCompile Include="number.cpp" />
     <ClCompile Include="sort.cpp" />
     <ClCompile Include="stack_queue.cpp" />
     <ClCompile Include="stack_use.cpp" />

@@ -18,7 +18,7 @@ int main(int argc, const char * argv[])
     //testMidfixToSubfix();
     //testEvalMidfix();
     //testNormalizePath();
-    //testLCS();
+    testLCS();
     //testLRS();
     //testMaxHuiwen();
     //testMyAtoi();
@@ -33,6 +33,6 @@ int main(int argc, const char * argv[])
     //testIsHuiwenNum();
     //testGcd();
     //testLcm();
-    testSequentialSum();
+    //testSequentialSum();
 }
 
