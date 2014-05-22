@@ -35,6 +35,8 @@ int main(int argc, const char * argv[])
     //testLcm();
     //testSequentialSum();
     //testMin_number_of_coin();
-    testLIS();
+    //testLIS();
+    //test_max_value_in_bag();
+    testCombine_of_coin();
 }
 

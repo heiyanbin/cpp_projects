@@ -16,6 +16,8 @@
 #define min(a,b) a < b ? a : b
 #define max(a,b) a > b ? a : b
 using namespace std;
+
+
 void testFindK();
 void testFast_sort();
 void testRelocateOddAndEven();
@@ -49,6 +51,8 @@ void testLcm();
 void testSequentialSum();
 void testMin_number_of_coin();
 void testLIS();
+void test_max_value_in_bag();
+void testCombine_of_coin();
 /*template <typename T>
 void swap(T &a, T &b)
 {d
@@ -73,5 +77,16 @@ void printVector(vector<T> v)
         cout<<v[i]<<" ";
     }
     cout<<endl;
+}
+template <typename T> void reverseArray(T a[], int n)
+{
+    assert(a && n>0);
+    int i= 0, j=n-1;
+    while(i<j)
+    {
+        swap(a[i],a[j]);
+        i++;
+        j--;
+    }
 }
 #endif

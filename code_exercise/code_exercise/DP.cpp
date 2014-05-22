@@ -1,15 +1,15 @@
 #include "lib.h"
 
-int min_number_of_coin(int coin[], int coin_num, int value)
+int min_number_of_coin(int coin[], int n, int value)
 {
-    assert(coin && coin_num >0 && value >=0);
+    assert(coin && n >0 && value >=0);
     int *d = new  int[value+1];
     d[0]=0;
 
     for(int v = 1;v<=value;v++)
     {
         d[v]= 65536;
-        for(int j=0;j<coin_num;j++)
+        for(int j=0;j<n;j++)
         {
             if(coin[j]<=v && d[v-coin[j]]+1<d[v])
             {
@@ -21,6 +21,26 @@ int min_number_of_coin(int coin[], int coin_num, int value)
     int ret = d[value];
     delete [] d;
     return ret;
+}
+int min_number_of_coin2(int coin[],int coin_num,int value, vector<int> &vector)
+{
+    assert(coin && value>=0 && coin_num>=0);
+
+    if(value==0) return 0;
+    if(coin_num==0) return -1;
+    if(coin[0]<=value) 
+    {
+        vector.push_back(coin[0]);
+        int num =  min_number_of_coin2(coin,coin_num,value-coin[0],vector);
+        if(num>=0) return num+1;
+        else
+        {
+            vector.pop_back();
+            return min_number_of_coin2(coin+1,coin_num-1, value, vector);
+        }
+    }
+    return min_number_of_coin2(coin+1,coin_num-1, value, vector);  
+    
 }
 int min_number_of_coin_recursive(int coin[], int coin_num, int value)
 {
@@ -37,6 +57,35 @@ int min_number_of_coin_recursive(int coin[], int coin_num, int value)
         }
     }
     return min;
+}
+int combine_of_coin(int coin[], int n, int value)
+{
+    assert(coin && n>=0 );
+    if(value<0) return 0;
+    if(value==0) return 1;
+    if(n==0) return -0;
+    return combine_of_coin(coin, n, value-coin[0]) + combine_of_coin(coin+1,n-1,value);
+}
+int combine_of_coin_DP(int coin[], int n, int value)
+{
+    assert(coin && n>=0 && value>=0);
+    int **dp = new int*[value+1];
+    for(int i=0;i<=n;i++)
+        dp[i] = new int[n+1];
+    for(int i=0;i<=value;i++)
+    {
+        for(int j= 0;j<=n;j++)
+        {
+            if(j==0 && i==0) return 1;
+            else if(j==0) dp[i][j] =0;
+            else if(i==0) dp[i][j] =1;
+            else 
+            {   
+                dp[i][j]=dp[i][j-1] + dp[i-coin[j-1]][j];
+            }
+        }
+    }
+    return dp[value][n];
 }
 int LIS(int a[], int n)
 {
@@ -142,15 +191,53 @@ int LSIS2(int a[], int n)
     return maxLen[n-1];
 }
 
-
+int max_value_in_bag(int c[], int v[], int n, int C)
+{
+    assert(c && v );
+    int *d = new int[C+1];
+    d[0]=0;
+    for(int i=0;i<=n;i++)
+    {
+        for(int j=C;j>0;j--)
+        {
+            if(i==0) 
+                d[j]=0;
+            else 
+            {
+                if(c[i-1]<=j )
+                    d[j]  =  max(d[j], d[j-c[i-1]] + v[i-1]);
+                else
+                    d[j] = d[j];
+            }
+        }
+    }
+    return d[C];
+}
+int max_value_in_bag_recursive(int c[], int v[], int n, int C)
+{
+    assert(c && v);
+    if(n==0 ||C==0) return 0;
+    if(c[0]<=C)
+    {
+        return max(max_value_in_bag_recursive(c+1, v+1,n-1,C-c[0])+v[0], max_value_in_bag_recursive(c+1,v+1,n-1,C));
+    }
+    else
+        return max_value_in_bag_recursive(c+1,v+1,n-1,C);
+}
 void testMin_number_of_coin()
 {
     int coin[] = {1,2,5};
-    for(int i=0;i<20;i++)
+    reverseArray(coin,3);
+    vector<int> v;
+
+    for(int i=0;i<=10;i++)
     {
-        cout<<min_number_of_coin(coin, 3, i)<<"  ";
-        cout<<min_number_of_coin_recursive(coin, 3, i)<<endl;
+      //  cout<<min_number_of_coin(coin, 3, i)<<"  ";
+      //  cout<<min_number_of_coin_recursive(coin, 3, i)<<endl;
         assert(min_number_of_coin(coin, 3, i) ==min_number_of_coin_recursive(coin, 3, i));
+        assert(min_number_of_coin(coin, 3, i) == min_number_of_coin2(coin, 3, i,v));
+        printVector(v);
+        v.clear();
     }
 }
 
@@ -164,4 +251,21 @@ void testLIS()
     cout<<LSIS3(A, 6)<<endl;
     cout<<LSISRecursive(A, 6)<<endl;
     
+}
+
+void test_max_value_in_bag()
+{
+    int c[] ={5,4,3,2};
+    int v[] ={10,10,12,5};
+    cout<<max_value_in_bag(c,v,4, 13)<<endl;
+    cout<<max_value_in_bag_recursive(c,v,4,13)<<endl;
+    for(int i=0;i<20;i++)
+        assert(max_value_in_bag(c,v,4, i) == max_value_in_bag_recursive(c,v,4,i));
+}
+
+void testCombine_of_coin()
+{
+    int coin[] = {1,2,5};
+    int i =combine_of_coin(coin, 3, 6);
+    int j =combine_of_coin_DP(coin, 3, 6);
 }
