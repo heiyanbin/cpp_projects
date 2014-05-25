@@ -43,6 +43,11 @@ void fast_sort(T a[], int begin, int end)
     fast_sort(a, begin, i-1);
     fast_sort(a, i+1, end);
 }
+void mySort(int a[], int n)
+{
+    assert(a && n>0);
+    fast_sort(a, 0, n-1);
+}
 template <typename T>
 void merge_array(T a[], int begin,int mid,int end)
 {

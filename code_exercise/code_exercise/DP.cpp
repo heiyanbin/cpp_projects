@@ -1,6 +1,6 @@
 #include "lib.h"
 
-int min_number_of_coin(int coin[], int n, int value)
+int min_number_of_coin_DP(int coin[], int n, int value)
 {
     assert(coin && n >0 && value >=0);
     int *d = new  int[value+1];
@@ -22,25 +22,24 @@ int min_number_of_coin(int coin[], int n, int value)
     delete [] d;
     return ret;
 }
-int min_number_of_coin2(int coin[],int coin_num,int value, vector<int> &vector)
+//assuming the coin value is already sorted descendingly
+int min_number_of_coin_Greedy(int coin[],int coin_num,int value, vector<int> &vector)
 {
-    assert(coin && value>=0 && coin_num>=0);
-
+    assert(coin && value>=0);
     if(value==0) return 0;
-    if(coin_num==0) return -1;
-    if(coin[0]<=value) 
+    int num=0;
+    int i=0;
+    while(value>0 && i< coin_num )
     {
-        vector.push_back(coin[0]);
-        int num =  min_number_of_coin2(coin,coin_num,value-coin[0],vector);
-        if(num>=0) return num+1;
-        else
+        while(coin[i]<=value)
         {
-            vector.pop_back();
-            return min_number_of_coin2(coin+1,coin_num-1, value, vector);
+            vector.push_back(coin[i]);
+            num++;
+            value -= coin[i];
         }
+        i++;
     }
-    return min_number_of_coin2(coin+1,coin_num-1, value, vector);  
-    
+    return num;
 }
 int min_number_of_coin_recursive(int coin[], int coin_num, int value)
 {
@@ -224,18 +223,41 @@ int max_value_in_bag_recursive(int c[], int v[], int n, int C)
     else
         return max_value_in_bag_recursive(c+1,v+1,n-1,C);
 }
+
+int min_total_time(int work_time[],int n, int machine_num)
+{
+    assert(work_time && n>=0 && machine_num>0);
+    int *d = new int[n+1];
+    int *e = new int[n+1];
+    d[0]=0;
+    e[0]=0;
+    for(int i=1;i<=n;i++)
+    {
+        if(i<=machine_num)
+        {
+            d[i] = max(d[i-1],work_time[i]);
+            e[i] = min(e[i-1],work_time[i]);
+        }
+        else
+        {
+            e[i] = e[i-1]+work_time[i];
+            
+            d[i] = max(d[i-1], e[i] );
+        }
+    }
+}
 void testMin_number_of_coin()
 {
     int coin[] = {1,2,5};
     reverseArray(coin,3);
     vector<int> v;
 
-    for(int i=0;i<=10;i++)
+    for(it i=0;i<=10;i++)
     {
       //  cout<<min_number_of_coin(coin, 3, i)<<"  ";
       //  cout<<min_number_of_coin_recursive(coin, 3, i)<<endl;
-        assert(min_number_of_coin(coin, 3, i) ==min_number_of_coin_recursive(coin, 3, i));
-        assert(min_number_of_coin(coin, 3, i) == min_number_of_coin2(coin, 3, i,v));
+        assert(min_number_of_coin_DP(coin, 3, i) ==min_number_of_coin_recursive(coin, 3, i));
+        assert(min_number_of_coin_DP(coin, 3, i) == min_number_of_coin_Greedy(coin, 3, i,v));
         printVector(v);
         v.clear();
     }

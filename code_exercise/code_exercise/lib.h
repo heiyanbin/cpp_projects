@@ -17,7 +17,7 @@
 #define max(a,b) a > b ? a : b
 using namespace std;
 
-
+void mySort(int[], int);
 void testFindK();
 void testFast_sort();
 void testRelocateOddAndEven();
