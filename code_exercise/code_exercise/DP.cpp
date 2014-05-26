@@ -224,35 +224,13 @@ int max_value_in_bag_recursive(int c[], int v[], int n, int C)
         return max_value_in_bag_recursive(c+1,v+1,n-1,C);
 }
 
-int min_total_time(int work_time[],int n, int machine_num)
-{
-    assert(work_time && n>=0 && machine_num>0);
-    int *d = new int[n+1];
-    int *e = new int[n+1];
-    d[0]=0;
-    e[0]=0;
-    for(int i=1;i<=n;i++)
-    {
-        if(i<=machine_num)
-        {
-            d[i] = max(d[i-1],work_time[i]);
-            e[i] = min(e[i-1],work_time[i]);
-        }
-        else
-        {
-            e[i] = e[i-1]+work_time[i];
-            
-            d[i] = max(d[i-1], e[i] );
-        }
-    }
-}
 void testMin_number_of_coin()
 {
     int coin[] = {1,2,5};
     reverseArray(coin,3);
     vector<int> v;
 
-    for(it i=0;i<=10;i++)
+    for(int i=0;i<=10;i++)
     {
       //  cout<<min_number_of_coin(coin, 3, i)<<"  ";
       //  cout<<min_number_of_coin_recursive(coin, 3, i)<<endl;
