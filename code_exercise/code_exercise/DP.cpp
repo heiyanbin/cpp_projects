@@ -62,8 +62,20 @@ int combine_of_coin(int coin[], int n, int value)
     assert(coin && n>=0 );
     if(value<0) return 0;
     if(value==0) return 1;
-    if(n==0) return -0;
+    if(n==0) return 0;
     return combine_of_coin(coin, n, value-coin[0]) + combine_of_coin(coin+1,n-1,value);
+}
+int combine_of_coin_TrackBack(int coin[], int n, int value)
+{
+    assert (coin && n>=0);
+    if(value<=0 || n==0) return 0;  
+    int *coin_count = new int[n];
+    int sum =0;
+    int i=0;
+    while(sum<value)
+    {
+        
+    }
 }
 int combine_of_coin_DP(int coin[], int n, int value)
 {
@@ -224,6 +236,52 @@ int max_value_in_bag_recursive(int c[], int v[], int n, int C)
         return max_value_in_bag_recursive(c+1,v+1,n-1,C);
 }
 
+int max_value_in_bag_trackback(int c[], int v[], int n, int C)
+{
+    assert(c && v);
+    if(n==0 ||C==0) return 0;
+    bool* pick = new bool[n];
+    int *pick_value = new int[n];
+    for(int i=0;i<n;i++) 
+        pick_value[i]=0;
+
+    int i=0;
+    int grab = 0;
+    int maxValue = 0;
+    
+    while(grab<C && i>=0)
+    {
+       if(i>=n)
+       {
+           int sum =0;
+           for(int k=0;k<n;k++)
+           {
+               if(pick[k]) 
+                   sum+= c[k];
+           }
+           if(sum>maxValue)
+               maxValue =sum;
+           
+       }
+       else
+       {
+           if(pick_value[i]==-1) 
+           {    
+               i--;
+               grab = grab -c[i];
+               continue;
+           }
+           pick[i]=pick_value[i];
+           grab = pick[i]==1 ? grab + c[i] : grab;
+           if(pick_value[i]==0) 
+               pick_value[i]=1;
+           if(pick_value[i]==1)
+               pick_value[i]=-1;
+           i++;
+       }
+    }
+    return maxValue;
+}
 void testMin_number_of_coin()
 {
     int coin[] = {1,2,5};
@@ -261,6 +319,8 @@ void test_max_value_in_bag()
     cout<<max_value_in_bag_recursive(c,v,4,13)<<endl;
     for(int i=0;i<20;i++)
         assert(max_value_in_bag(c,v,4, i) == max_value_in_bag_recursive(c,v,4,i));
+
+    cout<<max_value_in_bag_trackback(c,v,4,13);
 }
 
 void testCombine_of_coin()
