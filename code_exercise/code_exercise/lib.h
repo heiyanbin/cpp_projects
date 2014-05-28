@@ -53,6 +53,7 @@ void testMin_number_of_coin();
 void testLIS();
 void test_max_value_in_bag();
 void testCombine_of_coin();
+void test_combine_backtrack();
 /*template <typename T>
 void swap(T &a, T &b)
 {d

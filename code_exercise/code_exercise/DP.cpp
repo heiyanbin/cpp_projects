@@ -203,9 +203,9 @@ int LSIS2(int a[], int n)
     return maxLen[n-1];
 }
 
-int max_value_in_bag(int c[], int v[], int n, int C)
+int max_value_in_bag_DP(int w[], int v[], int n, int C)
 {
-    assert(c && v );
+    assert(w && v );
     int *d = new int[C+1];
     d[0]=0;
     for(int i=0;i<=n;i++)
@@ -216,8 +216,8 @@ int max_value_in_bag(int c[], int v[], int n, int C)
                 d[j]=0;
             else 
             {
-                if(c[i-1]<=j )
-                    d[j]  =  max(d[j], d[j-c[i-1]] + v[i-1]);
+                if(w[i-1]<=j )
+                    d[j]  =  max(d[j], d[j-w[i-1]] + v[i-1]);
                 else
                     d[j] = d[j];
             }
@@ -225,63 +225,99 @@ int max_value_in_bag(int c[], int v[], int n, int C)
     }
     return d[C];
 }
-int max_value_in_bag_recursive(int c[], int v[], int n, int C)
+int max_value_in_bag_recursive(int w[], int v[], int n, int C)
 {
-    assert(c && v);
+    assert(w && v);
     if(n==0 ||C==0) return 0;
-    if(c[0]<=C)
+    if(w[0]<=C)
     {
-        return max(max_value_in_bag_recursive(c+1, v+1,n-1,C-c[0])+v[0], max_value_in_bag_recursive(c+1,v+1,n-1,C));
+        return max(max_value_in_bag_recursive(w+1, v+1,n-1,C-w[0])+v[0], max_value_in_bag_recursive(w+1,v+1,n-1,C));
     }
     else
-        return max_value_in_bag_recursive(c+1,v+1,n-1,C);
+        return max_value_in_bag_recursive(w+1,v+1,n-1,C);
 }
 
-int max_value_in_bag_backtrack(int c[], int v[], int n, int C)
+int max_value_in_bag_backtrack(int w[], int v[], int n, int C)
 {
-    assert(c && v);
+    assert(w && v);
     if(n==0 ||C==0) return 0;
-    int* pick = new int[n];
+    int *x = new int[n];
     int *f = new int[n];
-    for(int i=0;i<n;i++) 
-        f[i]=0;
+    for(int k=0;k<n;k++) 
+        f[k]=0;
+
     int g =1;
     int t=0;
-    int grab = 0;
+    int weight = 0;
+    int value = 0;
     int maxValue = 0;
     
     while( t>=0)
     {
-        if(f[t]<=g)
+        if(f[t]<=g )
         {
-            for(int i=f[t];i<=g;i++)
+            for(int i=f[t]; i<=g; i++)
             {
-                pick[t]=i;
-                if(t<n && grab+pick[t]*c[t]<C) //bound & constrant
+                x[t]=i;
+                weight +=  x[t]*w[t];
+                value  +=  x[t]*v[t];
+                if( weight <=C) //bound & constrant
                 {
-                    grab = grab + pick[t];
-                    f[t]=i+1;
-                    if(t==n-1) //isSolution ?
+                    if(t==n-1) //is Solution ?
                     {
-                        int sumValue =0;
-                        for(int k=0;k<n;k++)
-                        {
-                            if(pick[k])
-                                sumValue+= v[k];
-                        }
-                        if(sumValue>maxValue)
-                            maxValue =sumValue;
+                        if(value>maxValue)
+                            maxValue =value;
                     }
-                    t++;
+                    f[t]=i+1;
+                    if(t<n-1)
+                        t++;
+                    break;
                 }
                 else
                     f[t]=i+1;
             }
         }
         else
+        {
+            value -= x[t]*v[t];
+            weight -=  x[t]*w[t];
+            f[t]=0;
             t--;
-       
+        }
     }
+    return maxValue;
+}
+void max_value_in_bag_backtrack_Recursive(int w[], int v[], int n, int C, int x[], int t, int &maxValue)
+{
+    assert(w && v && x);
+    int value =0, weight =0;
+    for(int i=0;i<t;i++)
+    {
+        value += x[i]*v[i];
+        weight += x[i]*w[i];
+    }
+    if(t>=n)
+    {
+        if(value > maxValue)
+            maxValue = value;
+    }
+    else
+    {
+        for(int i= 0;i<=1;i++)
+        {
+            x[t]= i;
+            if(weight + x[t]*w[t] <= C)
+            {
+                max_value_in_bag_backtrack_Recursive(w, v, n, C, x, t+1, maxValue);
+            }
+        }
+    }
+}
+int max_value_in_bag_backtrack2(int w[], int v[], int n, int C)
+{
+    int *x = new int[n];
+    int maxValue = 0;
+    max_value_in_bag_backtrack_Recursive(w,v,n,C,x,0,maxValue);
     return maxValue;
 }
 void testMin_number_of_coin()
@@ -315,14 +351,17 @@ void testLIS()
 
 void test_max_value_in_bag()
 {
-    int c[] ={5,4,3,2};
+    int w[] ={5,4,3,2};
     int v[] ={10,10,12,5};
-    cout<<max_value_in_bag(c,v,4, 13)<<endl;
-    cout<<max_value_in_bag_recursive(c,v,4,13)<<endl;
     for(int i=0;i<20;i++)
-        assert(max_value_in_bag(c,v,4, i) == max_value_in_bag_recursive(c,v,4,i));
-
-    cout<<max_value_in_bag_backtrack(c,v,4,13)<<endl;
+    {
+        int x1 = max_value_in_bag_DP(w,v,4, i);
+        int x2 = max_value_in_bag_recursive(w,v,4,i);
+        int x3 = max_value_in_bag_backtrack(w,v,4,i);
+        int x4 = max_value_in_bag_backtrack2(w,v,4,i);
+        assert(x1==x2 && x2 == x3 && x3==x4);
+        cout<<x1<<' '<<x2<<' '<<x3<<' '<<x4<<endl;
+    }
 }
 
 void testCombine_of_coin()
