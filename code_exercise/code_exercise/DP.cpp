@@ -76,6 +76,7 @@ int combine_of_coin_TrackBack(int coin[], int n, int value)
     {
         
     }
+    throw exception();
 }
 int combine_of_coin_DP(int coin[], int n, int value)
 {
@@ -236,49 +237,50 @@ int max_value_in_bag_recursive(int c[], int v[], int n, int C)
         return max_value_in_bag_recursive(c+1,v+1,n-1,C);
 }
 
-int max_value_in_bag_trackback(int c[], int v[], int n, int C)
+int max_value_in_bag_backtrack(int c[], int v[], int n, int C)
 {
     assert(c && v);
     if(n==0 ||C==0) return 0;
-    bool* pick = new bool[n];
-    int *pick_value = new int[n];
+    int* pick = new int[n];
+    int *f = new int[n];
     for(int i=0;i<n;i++) 
-        pick_value[i]=0;
-
-    int i=0;
+        f[i]=0;
+    int g =1;
+    int t=0;
     int grab = 0;
     int maxValue = 0;
     
-    while(grab<C && i>=0)
+    while( t>=0)
     {
-       if(i>=n)
-       {
-           int sum =0;
-           for(int k=0;k<n;k++)
-           {
-               if(pick[k]) 
-                   sum+= c[k];
-           }
-           if(sum>maxValue)
-               maxValue =sum;
-           
-       }
-       else
-       {
-           if(pick_value[i]==-1) 
-           {    
-               i--;
-               grab = grab -c[i];
-               continue;
-           }
-           pick[i]=pick_value[i];
-           grab = pick[i]==1 ? grab + c[i] : grab;
-           if(pick_value[i]==0) 
-               pick_value[i]=1;
-           if(pick_value[i]==1)
-               pick_value[i]=-1;
-           i++;
-       }
+        if(f[t]<=g)
+        {
+            for(int i=f[t];i<=g;i++)
+            {
+                pick[t]=i;
+                if(t<n && grab+pick[t]*c[t]<C) //bound & constrant
+                {
+                    grab = grab + pick[t];
+                    f[t]=i+1;
+                    if(t==n-1) //isSolution ?
+                    {
+                        int sumValue =0;
+                        for(int k=0;k<n;k++)
+                        {
+                            if(pick[k])
+                                sumValue+= v[k];
+                        }
+                        if(sumValue>maxValue)
+                            maxValue =sumValue;
+                    }
+                    t++;
+                }
+                else
+                    f[t]=i+1;
+            }
+        }
+        else
+            t--;
+       
     }
     return maxValue;
 }
@@ -320,7 +322,7 @@ void test_max_value_in_bag()
     for(int i=0;i<20;i++)
         assert(max_value_in_bag(c,v,4, i) == max_value_in_bag_recursive(c,v,4,i));
 
-    cout<<max_value_in_bag_trackback(c,v,4,13);
+    cout<<max_value_in_bag_backtrack(c,v,4,13)<<endl;
 }
 
 void testCombine_of_coin()
