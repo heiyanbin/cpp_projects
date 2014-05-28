@@ -38,6 +38,8 @@ int main(int argc, const char * argv[])
     //testLIS();
     //test_max_value_in_bag();
     //testCombine_of_coin();
-    test_combine_backtrack();
+    //test_combine_backtrack();
+    test_subset();
+
 }
 
