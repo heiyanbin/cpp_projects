@@ -36,10 +36,11 @@ int main(int argc, const char * argv[])
     //testSequentialSum();
     //testMin_number_of_coin();
     //testLIS();
-    test_max_value_in_bag();
+    //test_max_value_in_bag();
     //testCombine_of_coin();
     //test_combine_backtrack();
-    test_subset();
+    // test_subset();
+    test_combine_of_parentheses();
 
 }
 

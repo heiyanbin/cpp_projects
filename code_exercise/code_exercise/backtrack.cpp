@@ -69,6 +69,30 @@ void subset(int a[], int n, int t, int s, int x[])
     }
 }
 
+void combine_of_parentheses(int n, int t, char x[], int curLeftCount, int curRightCount, int & result)
+{
+    if(t>2*n-1)
+    {
+        for(int i=0;i<t;i++)
+            cout<<x[i];
+        cout<<endl;
+        result++;
+    }
+    else
+    {
+        if(curLeftCount<n)
+        {
+            x[t]='(';
+            combine_of_parentheses(n,t+1, x, curLeftCount+1, curRightCount, result);
+        }
+        if(curRightCount<curLeftCount) 
+        {
+            x[t] = ')';
+            combine_of_parentheses(n,t+1, x, curLeftCount, curRightCount+1, result);
+        }
+    }
+}
+
 void test_combine_backtrack()
 {
     int a[] = {1,2,3,4};
@@ -85,4 +109,14 @@ void test_subset()
     int a[] = {1,2,3,4};
     int x[4];
     subset(a, 3, 0, 0, x);
+}
+
+void test_combine_of_parentheses()
+{
+    char x[100];
+    int result =0;
+    int leftCount = 0;
+    int rightCount = 0;
+    combine_of_parentheses(4,0,x,leftCount, rightCount, result);
+    cout<<result<<endl;
 }
