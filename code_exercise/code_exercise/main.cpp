@@ -46,7 +46,44 @@ int main(int argc, const char * argv[])
     //test_combine_of_parentheses();
     test();
 }
-
+class LRUCache{
+public:
+    LRUCache(int capacity) {
+        this->capacity = capacity;
+    }
+    
+    int get(int key) {
+        if(mp.count(key)==1)
+        {
+            freq[key]++;
+            return mp[key];
+        }
+        return -1;
+    }
+    
+    void set(int key, int value) {
+        if(mp.size()<capacity)
+            mp[key]=value;
+        else
+        {
+            int least = INT_MAX;
+            int delKey=0;
+            for(map<int,int>::iterator it=freq.begin();it!=freq.end();it++)
+            {
+                if(it->first<least)
+                {
+                    least=it->second;
+                    delKey = it->second;
+                }
+            }
+            mp.erase(delKey);
+        }
+    }
+private:
+    map<int,int> mp;
+    map<int,int> freq;
+    int capacity;
+};
 void test()
 {
     
