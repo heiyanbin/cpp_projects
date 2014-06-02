@@ -46,46 +46,53 @@ int main(int argc, const char * argv[])
     //test_combine_of_parentheses();
     test();
 }
-class LRUCache{
+
+
+  /**
+ * Definition for binary tree
+ */ struct TreeNode {
+      int val;
+      TreeNode *left;
+      TreeNode *right;
+      TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+      TreeNode(int x, TreeNode *l, TreeNode *r) : val(x), left(l), right(r) {}
+  };
+ 
+class Solution {
 public:
-    LRUCache(int capacity) {
-        this->capacity = capacity;
+    int maxPathSum(TreeNode *root) {
+        if(!root) return 0;
+        int globalMaxSum = root->val;
+        int x = maxPathSumFromRoot(root, globalMaxSum);
+        return globalMaxSum;
     }
     
-    int get(int key) {
-        if(mp.count(key)==1)
-        {
-            freq[key]++;
-            return mp[key];
-        }
-        return -1;
+    int maxPathSumFromRoot(TreeNode * root, int &globalMaxSum)
+    {
+        if(root==NULL) return 0;
+        
+        int maxSum = root->val;
+        int leftSum = maxPathSumFromRoot(root->left,globalMaxSum)+root->val;
+        if(leftSum>maxSum)
+            maxSum = leftSum;
+        int rightSum = maxPathSumFromRoot(root->right,globalMaxSum)+root->val;
+        if( rightSum>maxSum)
+            maxSum = rightSum;
+        int allSum = leftSum - root->val + rightSum;
+        if(allSum > globalMaxSum)
+            globalMaxSum= allSum;
+        if(maxSum>globalMaxSum)
+            globalMaxSum = maxSum;
+        return maxSum;
     }
-    
-    void set(int key, int value) {
-        if(mp.size()<capacity)
-            mp[key]=value;
-        else
-        {
-            int least = INT_MAX;
-            int delKey=0;
-            for(map<int,int>::iterator it=freq.begin();it!=freq.end();it++)
-            {
-                if(it->first<least)
-                {
-                    least=it->second;
-                    delKey = it->second;
-                }
-            }
-            mp.erase(delKey);
-        }
-    }
-private:
-    map<int,int> mp;
-    map<int,int> freq;
-    int capacity;
+
 };
 void test()
 {
+   
+    TreeNode *root = new TreeNode(5,new TreeNode(4,new TreeNode(11,new TreeNode(7,NULL,new TreeNode(1)),new TreeNode(2)),NULL),new TreeNode(8,new TreeNode(13),new TreeNode(4)));
     
+    Solution s;
+    int x = s.maxPathSum(root);
 }
 
