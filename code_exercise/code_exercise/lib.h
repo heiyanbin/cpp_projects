@@ -13,8 +13,6 @@
 #include <vector>
 #include <cassert>
 
-#define min(a,b) a < b ? a : b
-#define max(a,b) a > b ? a : b
 using namespace std;
 
 void test();

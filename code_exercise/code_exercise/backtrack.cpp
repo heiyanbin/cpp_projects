@@ -36,10 +36,10 @@ void combine_backtrack_iterative(int a[], int n, int m)
                     printArray(x, m);
                 }
                 if(t<m-1)
-                {
-                    s[t]=i+1;
+                {    //when go to next level, remember 2 things:
+                    s[t]=i+1; //move the current level's candidates  to next
                     t++;
-                    s[t]=i+1;
+                    s[t]=i+1; //set the new level's first candidate 
                     break;
                 }
                 s[t]=i+1;
@@ -62,10 +62,7 @@ void subset(int a[], int n, int t, int s, int x[])
     {
         x[t]=a[i];
         printArray(x, t+1);
-        if(t<n-1)
-        {
-            subset(a,n,t+1,i+1,x);
-        }
+        subset(a,n,t+1,i+1,x);
     }
 }
 
@@ -106,9 +103,9 @@ void test_combine_backtrack()
 
 void test_subset()
 {
-    int a[] = {1,2,3,4};
-    int x[4];
-    subset(a, 3, 0, 0, x);
+    int a[] = {1,2,3,4,5};
+    int x[5];
+    subset(a, 5, 0, 0, x);
 }
 
 void test_combine_of_parentheses()

@@ -33,19 +33,14 @@ void insert(int a[], int n, int value)
 
 void minHeapFixDown(int a[], int i, int n)
 {
-    if(!a||n<2) return;
-    int j= 2*i+1;
-    
-    while(j<n)
+    while(2*i+1<n)
     {
+        int j= 2*i+1;
         if(j+1< n && a[j+1]<a[j])
             j=j+1;
-        if(a[j]<a[i])
-            swap(a[i],a[j]);
-        else
-            break;
+        if(a[i]<=a[j]) break;
+         swap(a[i],a[j]);
         i=j;
-        j=2*j+1;
     }
 }
 void remove(int a[], int n)
