@@ -298,7 +298,6 @@ public:
         }
         return maxSum;
     }
-
 };
 
 class Solution10 {

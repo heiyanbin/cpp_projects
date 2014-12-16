@@ -304,7 +304,59 @@ void combine(int a[],int m, int begin, int end)
     }
     
 }
-
+int partition3(int a[], int begin, int end)
+{
+    if(end-begin<1) return end - begin;
+    int i=begin+1;
+    for(int j=begin+1;j<end;j++)
+    {
+        if(a[j]<a[begin])
+        {
+            swap(a[i],a[j]);
+            i++;
+        }
+    }
+    swap(a[begin],a[i-1]);
+    return i-1;
+}
+int partition2(int a[], int begin, int end)
+{
+    if(begin>end) return -1;
+    if(begin==end) return 0;
+    int x=a[begin];
+    while(begin<end)
+    {
+        while(begin<end && a[end]>=x)
+            end--;
+        if(begin<end)
+            a[begin]=a[end];
+        while(begin<end && a[begin]<x)
+            begin++;
+        if(begin<end)
+            a[end]=a[begin];
+    }
+    a[begin]=x;
+    return begin;
+}
+int partition1(int a[], int begin, int end)
+{
+	if(begin>end) return -1;
+    if(begin==end) return 0;
+    int i= begin+1,j=end;
+    while(i<j)
+    {
+        while(i<j && a[i]<a[begin])
+            i++;
+        while(i<j && a[j]>=a[begin])
+            j--;
+        if(i<j)
+            swap(a[i],a[j]);
+    }
+    if(a[i]<a[begin])
+        i++;
+    swap(a[i-1],a[begin]);
+    return i-1;
+}
 void testCombine()
 {
     int a[] = {1,2,3,4};
