@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
+#include <functional>
 
 #define min(a,b) a < b ? a : b
 #define max(a,b) a > b ? a : b
