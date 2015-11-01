@@ -203,7 +203,7 @@ int evalMidfix(char* midfix)
 
 void testMidfixToSubfix()
 {
-    char * a= midfixToSubfix("1+20*3-5");
+    char * a= midfixToSubfix("(1+20)*3-5");
     cout<<a;
 }
 

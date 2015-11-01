@@ -103,18 +103,16 @@ int LIS(int a[], int n)
 {
     assert(a && n>0);
     int maxLen=0;
-    int *d = new int[n];
+    vector<int> d(n,1);
     for(int i=0;i<n;i++)
     {
-        d[i]=1;
         for(int j=0;j<i;j++)
         {
             if(a[i]>=a[j] && d[j]+1 >d[i])
                 d[i]=d[j]+1;
         }
-        if(d[i]>maxLen) maxLen = d[i];
+        maxLen = max(maxLen, d[i]);
     }
-    delete [] d;
     return maxLen;
 }
 int LISRecursive(int a[], int n)
@@ -320,6 +318,8 @@ int max_value_in_bag_backtrack2(int w[], int v[], int n, int C)
     max_value_in_bag_backtrack_Recursive(w,v,n,C,x,0,maxValue);
     return maxValue;
 }
+
+
 void testMin_number_of_coin()
 {
     int coin[] = {1,2,5};

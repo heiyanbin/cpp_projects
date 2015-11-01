@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E11A5A78-390E-4BDD-BC83-E57FD11FFAA9}</ProjectGuid>
+    <ProjectGuid>{5384121A-ECF9-489D-A486-31860FF73FF4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>acm_exercise</RootNamespace>
+    <RootNamespace>projecteuler_oj</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -76,11 +76,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main1.cpp" />
-    <ClCompile Include="main2.cpp" />
-    <ClCompile Include="main3.cpp" />
-    <ClCompile Include="main4.cpp" />
-    <ClCompile Include="tile_cover.cpp" />
+    <ClCompile Include="pe1.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="pe2.cpp" />
+    <ClCompile Include="pe3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
